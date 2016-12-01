@@ -1,0 +1,1 @@
+(DOOR.lock changes from "LOCKED"; DOOR.lock == "UNLOCKED"; [HALLWAY_LIGHT.switch := "ON"])
