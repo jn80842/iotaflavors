@@ -1,0 +1,3 @@
+var _jn80842$iotaflavors$Main$main = _elm_lang$html$Html$beginnerProgram(
+	{model: _jn80842$iotaflavors$Model$init, update: _jn80842$iotaflavors$Update$update, view: _jn80842$iotaflavors$View$view})();
+var _jn80842$iotaflavors$Main$init = {ctor: '_Tuple2', _0: _jn80842$iotaflavors$Model$init, _1: _elm_lang$core$Platform_Cmd$none};

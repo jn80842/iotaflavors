@@ -1,0 +1,9 @@
+var _jn80842$iotaflavors$Model$init = {
+	door: A2(_jn80842$iotaflavors$Devices$Door, 'Front door', _jn80842$iotaflavors$Devices$Locked),
+	light: A2(_jn80842$iotaflavors$Devices$Light, 'Hallway light', _jn80842$iotaflavors$Devices$Off),
+	placeholder: 'hello'
+};
+var _jn80842$iotaflavors$Model$Model = F3(
+	function (a, b, c) {
+		return {door: a, light: b, placeholder: c};
+	});

@@ -1,0 +1,29 @@
+var _jn80842$iotaflavors$Update$update = F2(
+	function (msg, model) {
+		var _p0 = msg;
+		switch (_p0.ctor) {
+			case 'NoOp':
+				return _elm_lang$core$Native_Utils.update(
+					model,
+					{placeholder: ''});
+			case 'UpdateDoorStatus':
+				return _elm_lang$core$Native_Utils.update(
+					model,
+					{
+						door: A2(_jn80842$iotaflavors$Devices$changeDoorStatus, model.door, _p0._0)
+					});
+			default:
+				return _elm_lang$core$Native_Utils.update(
+					model,
+					{
+						light: A2(_jn80842$iotaflavors$Devices$changeLightStatus, model.light, _p0._0)
+					});
+		}
+	});
+var _jn80842$iotaflavors$Update$UpdateLightStatus = function (a) {
+	return {ctor: 'UpdateLightStatus', _0: a};
+};
+var _jn80842$iotaflavors$Update$UpdateDoorStatus = function (a) {
+	return {ctor: 'UpdateDoorStatus', _0: a};
+};
+var _jn80842$iotaflavors$Update$NoOp = {ctor: 'NoOp'};

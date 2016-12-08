@@ -1,0 +1,56 @@
+var _jn80842$iotaflavors$Devices$getDeviceStatus = function (d) {
+	var _p0 = d;
+	if (_p0.ctor === 'Door') {
+		var _p1 = _p0._1;
+		if (_p1.ctor === 'Locked') {
+			return 'Locked';
+		} else {
+			return 'Unlocked';
+		}
+	} else {
+		var _p2 = _p0._1;
+		if (_p2.ctor === 'Off') {
+			return 'Off';
+		} else {
+			return 'On';
+		}
+	}
+};
+var _jn80842$iotaflavors$Devices$getDeviceName = function (d) {
+	var _p3 = d;
+	if (_p3.ctor === 'Door') {
+		return _p3._0;
+	} else {
+		return _p3._0;
+	}
+};
+var _jn80842$iotaflavors$Devices$Light = F2(
+	function (a, b) {
+		return {ctor: 'Light', _0: a, _1: b};
+	});
+var _jn80842$iotaflavors$Devices$changeLightStatus = F2(
+	function (l, s) {
+		var _p4 = l;
+		if (_p4.ctor === 'Light') {
+			return A2(_jn80842$iotaflavors$Devices$Light, _p4._0, s);
+		} else {
+			return A2(_jn80842$iotaflavors$Devices$Light, 'bad type', s);
+		}
+	});
+var _jn80842$iotaflavors$Devices$Door = F2(
+	function (a, b) {
+		return {ctor: 'Door', _0: a, _1: b};
+	});
+var _jn80842$iotaflavors$Devices$changeDoorStatus = F2(
+	function (d, s) {
+		var _p5 = d;
+		if (_p5.ctor === 'Door') {
+			return A2(_jn80842$iotaflavors$Devices$Door, _p5._0, s);
+		} else {
+			return A2(_jn80842$iotaflavors$Devices$Door, 'bad type', s);
+		}
+	});
+var _jn80842$iotaflavors$Devices$On = {ctor: 'On'};
+var _jn80842$iotaflavors$Devices$Off = {ctor: 'Off'};
+var _jn80842$iotaflavors$Devices$Unlocked = {ctor: 'Unlocked'};
+var _jn80842$iotaflavors$Devices$Locked = {ctor: 'Locked'};

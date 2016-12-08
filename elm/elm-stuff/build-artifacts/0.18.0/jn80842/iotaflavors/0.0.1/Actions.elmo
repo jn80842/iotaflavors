@@ -1,0 +1,2 @@
+var _jn80842$iotaflavors$Actions$NoOp = {ctor: 'NoOp'};
+var _jn80842$iotaflavors$Actions$Init = {ctor: 'Init'};
