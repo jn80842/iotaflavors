@@ -1,0 +1,58 @@
+<html>
+<head>
+<script type="text/javascript" src="./flapjax-2.1.js"></script>
+<title>Simple IoT program: Flapjax</title>
+<style type="text/css">
+body { text-align: center;
+        background-color: #CCFFCC;
+        color: #006600; }
+</style>
+<script type="text/javascript">
+var stateDict = {light: "Off",door: "Locked"};
+
+function loader() {
+    // starting values for event streams are the default-checked radio buttons
+    var doorStateE = extractValueE('doorState');
+    var lightStateE = extractValueE('lightState');
+    // we filter the door state for 'unlocked' and transform it into the desired state of the light
+    var lightOnWhenDoorUnlocksE = filterE(doorStateE,function(s) { return s == "Unlocked"}).mapE(function(s) { return "On"; });
+    // construct an event stream of all events that can cause the lights to be on
+    var lightSourceE = mergeE(lightStateE,lightOnWhenDoorUnlocksE);
+    // we didn't do anything to the door stream so just use the original stream
+    // use those streams to update the state of the system (dictionary and html display)
+    doorStateE.mapE(function(s) { stateDict["door"] = s; });
+    lightSourceE.mapE(function(s) { stateDict["light"] = s; });
+    insertDomE(doorStateE,'door-status');
+    insertDomE(lightSourceE,'light-status');
+    // we only need to update radio buttons if a derived event can cause them to change
+    insertDomE(lightSourceE.mapE(function(s) { return INPUT({type: "radio", id: "turnOnLight", name:"lightState", value:"On",checked:"true"});}),"turnOnLight");
+}
+</script>
+
+
+</head>
+<body onload="loader()">
+<div id="door">
+<p>Door status:</p>
+<span id="door-status">Locked</span>
+<ul>
+<li>
+Unlock door: <input type="radio" id="unlockDoorSelect" name="doorState" value="Unlocked" />
+</li><li>
+Lock door: <input type="radio" id="lockDoorSelect" name="doorState" value="Locked" checked="true"/>
+</li></ul>
+</div>
+<hr />
+<div id="light">
+<p>Light status:</p>
+<span id="light-status">Off</span>
+<ul><li>
+Turn on light: <input type="radio" id="turnOnLight" name="lightState" value="On" />
+</li><li>
+Turn off light: <input type="radio" id="turnOffLight" name="lightState" value="Off" checked="true"/>
+</li></ul>
+</div>
+<hr />
+
+</body>
+</html>

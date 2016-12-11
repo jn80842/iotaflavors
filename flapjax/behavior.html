@@ -1,0 +1,59 @@
+<html>
+<head>
+<script type="text/javascript" src="./flapjax-2.1.js"></script>
+<title>Simple IoT program: Flapjax</title>
+<style type="text/css">
+body { text-align: center;
+        background-color: #CCFFCC;
+        color: #006600; }
+</style>
+<script type="text/javascript">
+var replaceLockedRadioButton = function(currentVal) {
+    return INPUT({type: "radio", id: "lockDoorSelect", name: "doorState", value: "Locked", checked: ("Locked" == currentVal).toString() });
+}
+var replaceOnLightRadioButton = function(currentVal) {
+    return INPUT({type: "radio", id: "turnOnLight!", name: "lightState", value: "On", checked: ("On" == currentVal).toString()});
+}
+var replaceOffLightRadioButton = function(currentVal) {
+    return INPUT({type: "radio", id: "turnOffLight!", name: "lightState", value: "Off", checked: ("Off" == currentVal).toString()});
+}
+
+function loader() {
+    var doorStateB = extractValueB('doorState');
+    var isDoorUnlockedB = doorStateB.liftB(function(s) { return s == "Unlocked"});
+    var lightStateB = extractValueB('lightState');
+    var lightWithRuleB = ifB(isDoorUnlockedB,constantB("On"),lightStateB)
+    insertDomB(doorStateB,'door-status');
+    insertDomB(lightWithRuleB,'light-status');
+    insertDomB(lightWithRuleB.liftB(replaceOffLightRadioButton),"turnOffLight");
+    insertDomB(lightWithRuleB.liftB(replaceOnLightRadioButton),"turnOnLight");
+}
+</script>
+
+
+</head>
+<body onload="loader()">
+<div id="door">
+<p>Door status:</p>
+<span id="door-status">Locked</span>
+<ul>
+<li>
+Unlock door: <input type="radio" id="unlockDoorSelect" name="doorState" value="Unlocked" />
+</li><li>
+Lock door: <input type="radio" id="lockDoorSelect" name="doorState" value="Locked" checked="true"/>
+</li></ul>
+</div>
+<hr />
+<div id="light">
+<p>Light status:</p>
+<span id="light-status">Off</span>
+<ul><li>
+Turn on light: <input type="radio" id="turnOnLight" name="lightState" value="On" />
+</li><li>
+Turn off light: <input type="radio" id="turnOffLight" name="lightState" value="Off" checked="true"/>
+</li></ul>
+</div>
+<hr />
+
+</body>
+</html>
